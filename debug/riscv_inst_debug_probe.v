@@ -2,12 +2,69 @@
 // Author   : H Geng
 // Version  : v1.2
 // Description:
-//  RISC-V debug probe
+//  RISC-V instruction debug probe
+//** ADD THIS PROBE TO TESTBENCH & SIMULATION SOURCES **
+//** DO NOT ADD THIS PROBE TO TAPE-OUT CODES **
 //=====================================================================
 
-`include "riscv_inst_decode_probe_defines.v"
+`include "riscv_inst_debug_probe_defines.v"
 
-module riscv_inst_decode_probe(
+// Instantiation Example
+// ridp means riscv_inst_debug_probe, add this prefix to avoid name conflicts
+// wire [31:0]      ridp_inst              ;
+// wire [10*8-1:0]  ridp_inst_name_ascii   ;   // string. Radix=ASCII;
+// wire [4*8-1:0]   ridp_inst_type_ascii   ;   // string. Radix=ASCII;
+// wire [7*8-1:0]   ridp_rs1_name_ascii    ;   // string. Radix=ASCII;
+// wire [7*8-1:0]   ridp_rs2_name_ascii    ;   // string. Radix=ASCII;
+// wire [7*8-1:0]   ridp_rd_name_ascii     ;   // string. Radix=ASCII;
+// wire [6:0]       ridp_opcode            ;
+// wire [4:0]       ridp_rs1               ;
+// wire [4:0]       ridp_rs2               ;
+// wire [4:0]       ridp_rd                ;
+// wire [2:0]       ridp_funct3            ;
+// wire [6:0]       ridp_funct7            ;
+// wire [31:0]      ridp_immi              ;
+// wire [31:0]      ridp_imms              ;  // NOTE: imms = offset
+// wire [31:0]      ridp_immb              ;
+// wire [31:0]      ridp_immu              ;
+// wire [31:0]      ridp_immj              ;
+// wire [4:0]       ridp_shamt             ;
+// wire [3:0]       ridp_fm                ;
+// wire [3:0]       ridp_pred              ;
+// wire [3:0]       ridp_succ              ;
+// wire [11:0]      ridp_csr               ;
+// wire [4:0]       ridp_zimm              ;
+// 
+// assign ridp_inst = cpu_core.ifu.instruction;
+// 
+// riscv_inst_debug_probe u_riscv_inst_debug_probe (
+//     .inst               ( ridp_inst            ),
+//     .inst_name_ascii    ( ridp_inst_name_ascii ),
+//     .inst_type_ascii    ( ridp_inst_type_ascii ),
+//     .rs1_name_ascii     ( ridp_rs1_name_ascii  ),
+//     .rs2_name_ascii     ( ridp_rs2_name_ascii  ),
+//     .rd_name_ascii      ( ridp_rd_name_ascii   ),
+//     .opcode             ( ridp_opcode          ),
+//     .rs1                ( ridp_rs1             ),
+//     .rs2                ( ridp_rs2             ),
+//     .rd                 ( ridp_rd              ),
+//     .funct3             ( ridp_funct3          ),
+//     .funct7             ( ridp_funct7          ),
+//     .immi               ( ridp_immi            ),
+//     .imms               ( ridp_imms            ),
+//     .immb               ( ridp_immb            ),
+//     .immu               ( ridp_immu            ),
+//     .immj               ( ridp_immj            ),
+//     .shamt              ( ridp_shamt           ),
+//     .fm                 ( ridp_fm              ),
+//     .pred               ( ridp_pred            ),
+//     .succ               ( ridp_succ            ),
+//     .csr                ( ridp_csr             ),
+//     .zimm               ( ridp_zimm            )
+// );
+
+
+module riscv_inst_debug_probe(
     input       [31:0]      inst
     ,output reg [10*8-1:0]  inst_name_ascii   // string. Radix=ASCII
     ,output reg [4*8-1:0]   inst_type_ascii   // string. Radix=ASCII
@@ -416,112 +473,112 @@ module riscv_inst_decode_probe(
     // decode reg name
     always @* begin
         case(rs1)
-            5'd0:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X0; end
-            5'd1:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X1; end
-            5'd2:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X2; end
-            5'd3:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X3; end
-            5'd4:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X4; end
-            5'd5:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X5; end
-            5'd6:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X6; end
-            5'd7:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X7; end
-            5'd8:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X8; end
-            5'd9:  begin rs1_name_ascii = `DEBUG_REG_ASCII_X9; end
-            5'd10: begin rs1_name_ascii = `DEBUG_REG_ASCII_X10; end
-            5'd11: begin rs1_name_ascii = `DEBUG_REG_ASCII_X11; end
-            5'd12: begin rs1_name_ascii = `DEBUG_REG_ASCII_X12; end
-            5'd13: begin rs1_name_ascii = `DEBUG_REG_ASCII_X13; end
-            5'd14: begin rs1_name_ascii = `DEBUG_REG_ASCII_X14; end
-            5'd15: begin rs1_name_ascii = `DEBUG_REG_ASCII_X15; end
-            5'd16: begin rs1_name_ascii = `DEBUG_REG_ASCII_X16; end
-            5'd17: begin rs1_name_ascii = `DEBUG_REG_ASCII_X17; end
-            5'd18: begin rs1_name_ascii = `DEBUG_REG_ASCII_X18; end
-            5'd19: begin rs1_name_ascii = `DEBUG_REG_ASCII_X19; end
-            5'd20: begin rs1_name_ascii = `DEBUG_REG_ASCII_X20; end
-            5'd21: begin rs1_name_ascii = `DEBUG_REG_ASCII_X21; end
-            5'd22: begin rs1_name_ascii = `DEBUG_REG_ASCII_X22; end
-            5'd23: begin rs1_name_ascii = `DEBUG_REG_ASCII_X23; end
-            5'd24: begin rs1_name_ascii = `DEBUG_REG_ASCII_X24; end
-            5'd25: begin rs1_name_ascii = `DEBUG_REG_ASCII_X25; end
-            5'd26: begin rs1_name_ascii = `DEBUG_REG_ASCII_X26; end
-            5'd27: begin rs1_name_ascii = `DEBUG_REG_ASCII_X27; end
-            5'd28: begin rs1_name_ascii = `DEBUG_REG_ASCII_X28; end
-            5'd29: begin rs1_name_ascii = `DEBUG_REG_ASCII_X29; end
-            5'd30: begin rs1_name_ascii = `DEBUG_REG_ASCII_X30; end
-            5'd31: begin rs1_name_ascii = `DEBUG_REG_ASCII_X31; end
+            5'd0:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X0; end
+            5'd1:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X1; end
+            5'd2:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X2; end
+            5'd3:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X3; end
+            5'd4:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X4; end
+            5'd5:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X5; end
+            5'd6:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X6; end
+            5'd7:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X7; end
+            5'd8:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X8; end
+            5'd9:  begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X9; end
+            5'd10: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X10; end
+            5'd11: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X11; end
+            5'd12: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X12; end
+            5'd13: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X13; end
+            5'd14: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X14; end
+            5'd15: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X15; end
+            5'd16: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X16; end
+            5'd17: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X17; end
+            5'd18: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X18; end
+            5'd19: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X19; end
+            5'd20: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X20; end
+            5'd21: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X21; end
+            5'd22: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X22; end
+            5'd23: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X23; end
+            5'd24: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X24; end
+            5'd25: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X25; end
+            5'd26: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X26; end
+            5'd27: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X27; end
+            5'd28: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X28; end
+            5'd29: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X29; end
+            5'd30: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X30; end
+            5'd31: begin rs1_name_ascii = `DBG_REG_NAME_ASCII_X31; end
         endcase
     end
 
     always @* begin
         case(rs2)
-            5'd0:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X0; end
-            5'd1:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X1; end
-            5'd2:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X2; end
-            5'd3:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X3; end
-            5'd4:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X4; end
-            5'd5:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X5; end
-            5'd6:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X6; end
-            5'd7:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X7; end
-            5'd8:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X8; end
-            5'd9:  begin rs2_name_ascii = `DEBUG_REG_ASCII_X9; end
-            5'd10: begin rs2_name_ascii = `DEBUG_REG_ASCII_X10; end
-            5'd11: begin rs2_name_ascii = `DEBUG_REG_ASCII_X11; end
-            5'd12: begin rs2_name_ascii = `DEBUG_REG_ASCII_X12; end
-            5'd13: begin rs2_name_ascii = `DEBUG_REG_ASCII_X13; end
-            5'd14: begin rs2_name_ascii = `DEBUG_REG_ASCII_X14; end
-            5'd15: begin rs2_name_ascii = `DEBUG_REG_ASCII_X15; end
-            5'd16: begin rs2_name_ascii = `DEBUG_REG_ASCII_X16; end
-            5'd17: begin rs2_name_ascii = `DEBUG_REG_ASCII_X17; end
-            5'd18: begin rs2_name_ascii = `DEBUG_REG_ASCII_X18; end
-            5'd19: begin rs2_name_ascii = `DEBUG_REG_ASCII_X19; end
-            5'd20: begin rs2_name_ascii = `DEBUG_REG_ASCII_X20; end
-            5'd21: begin rs2_name_ascii = `DEBUG_REG_ASCII_X21; end
-            5'd22: begin rs2_name_ascii = `DEBUG_REG_ASCII_X22; end
-            5'd23: begin rs2_name_ascii = `DEBUG_REG_ASCII_X23; end
-            5'd24: begin rs2_name_ascii = `DEBUG_REG_ASCII_X24; end
-            5'd25: begin rs2_name_ascii = `DEBUG_REG_ASCII_X25; end
-            5'd26: begin rs2_name_ascii = `DEBUG_REG_ASCII_X26; end
-            5'd27: begin rs2_name_ascii = `DEBUG_REG_ASCII_X27; end
-            5'd28: begin rs2_name_ascii = `DEBUG_REG_ASCII_X28; end
-            5'd29: begin rs2_name_ascii = `DEBUG_REG_ASCII_X29; end
-            5'd30: begin rs2_name_ascii = `DEBUG_REG_ASCII_X30; end
-            5'd31: begin rs2_name_ascii = `DEBUG_REG_ASCII_X31; end
+            5'd0:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X0; end
+            5'd1:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X1; end
+            5'd2:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X2; end
+            5'd3:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X3; end
+            5'd4:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X4; end
+            5'd5:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X5; end
+            5'd6:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X6; end
+            5'd7:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X7; end
+            5'd8:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X8; end
+            5'd9:  begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X9; end
+            5'd10: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X10; end
+            5'd11: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X11; end
+            5'd12: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X12; end
+            5'd13: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X13; end
+            5'd14: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X14; end
+            5'd15: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X15; end
+            5'd16: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X16; end
+            5'd17: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X17; end
+            5'd18: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X18; end
+            5'd19: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X19; end
+            5'd20: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X20; end
+            5'd21: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X21; end
+            5'd22: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X22; end
+            5'd23: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X23; end
+            5'd24: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X24; end
+            5'd25: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X25; end
+            5'd26: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X26; end
+            5'd27: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X27; end
+            5'd28: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X28; end
+            5'd29: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X29; end
+            5'd30: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X30; end
+            5'd31: begin rs2_name_ascii = `DBG_REG_NAME_ASCII_X31; end
         endcase
     end
 
     always @* begin
         case(rd)
-            5'd0:  begin rd_name_ascii = `DEBUG_REG_ASCII_X0; end
-            5'd1:  begin rd_name_ascii = `DEBUG_REG_ASCII_X1; end
-            5'd2:  begin rd_name_ascii = `DEBUG_REG_ASCII_X2; end
-            5'd3:  begin rd_name_ascii = `DEBUG_REG_ASCII_X3; end
-            5'd4:  begin rd_name_ascii = `DEBUG_REG_ASCII_X4; end
-            5'd5:  begin rd_name_ascii = `DEBUG_REG_ASCII_X5; end
-            5'd6:  begin rd_name_ascii = `DEBUG_REG_ASCII_X6; end
-            5'd7:  begin rd_name_ascii = `DEBUG_REG_ASCII_X7; end
-            5'd8:  begin rd_name_ascii = `DEBUG_REG_ASCII_X8; end
-            5'd9:  begin rd_name_ascii = `DEBUG_REG_ASCII_X9; end
-            5'd10: begin rd_name_ascii = `DEBUG_REG_ASCII_X10; end
-            5'd11: begin rd_name_ascii = `DEBUG_REG_ASCII_X11; end
-            5'd12: begin rd_name_ascii = `DEBUG_REG_ASCII_X12; end
-            5'd13: begin rd_name_ascii = `DEBUG_REG_ASCII_X13; end
-            5'd14: begin rd_name_ascii = `DEBUG_REG_ASCII_X14; end
-            5'd15: begin rd_name_ascii = `DEBUG_REG_ASCII_X15; end
-            5'd16: begin rd_name_ascii = `DEBUG_REG_ASCII_X16; end
-            5'd17: begin rd_name_ascii = `DEBUG_REG_ASCII_X17; end
-            5'd18: begin rd_name_ascii = `DEBUG_REG_ASCII_X18; end
-            5'd19: begin rd_name_ascii = `DEBUG_REG_ASCII_X19; end
-            5'd20: begin rd_name_ascii = `DEBUG_REG_ASCII_X20; end
-            5'd21: begin rd_name_ascii = `DEBUG_REG_ASCII_X21; end
-            5'd22: begin rd_name_ascii = `DEBUG_REG_ASCII_X22; end
-            5'd23: begin rd_name_ascii = `DEBUG_REG_ASCII_X23; end
-            5'd24: begin rd_name_ascii = `DEBUG_REG_ASCII_X24; end
-            5'd25: begin rd_name_ascii = `DEBUG_REG_ASCII_X25; end
-            5'd26: begin rd_name_ascii = `DEBUG_REG_ASCII_X26; end
-            5'd27: begin rd_name_ascii = `DEBUG_REG_ASCII_X27; end
-            5'd28: begin rd_name_ascii = `DEBUG_REG_ASCII_X28; end
-            5'd29: begin rd_name_ascii = `DEBUG_REG_ASCII_X29; end
-            5'd30: begin rd_name_ascii = `DEBUG_REG_ASCII_X30; end
-            5'd31: begin rd_name_ascii = `DEBUG_REG_ASCII_X31; end
+            5'd0:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X0; end
+            5'd1:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X1; end
+            5'd2:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X2; end
+            5'd3:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X3; end
+            5'd4:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X4; end
+            5'd5:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X5; end
+            5'd6:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X6; end
+            5'd7:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X7; end
+            5'd8:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X8; end
+            5'd9:  begin rd_name_ascii = `DBG_REG_NAME_ASCII_X9; end
+            5'd10: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X10; end
+            5'd11: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X11; end
+            5'd12: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X12; end
+            5'd13: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X13; end
+            5'd14: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X14; end
+            5'd15: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X15; end
+            5'd16: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X16; end
+            5'd17: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X17; end
+            5'd18: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X18; end
+            5'd19: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X19; end
+            5'd20: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X20; end
+            5'd21: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X21; end
+            5'd22: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X22; end
+            5'd23: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X23; end
+            5'd24: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X24; end
+            5'd25: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X25; end
+            5'd26: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X26; end
+            5'd27: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X27; end
+            5'd28: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X28; end
+            5'd29: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X29; end
+            5'd30: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X30; end
+            5'd31: begin rd_name_ascii = `DBG_REG_NAME_ASCII_X31; end
         endcase
     end
 

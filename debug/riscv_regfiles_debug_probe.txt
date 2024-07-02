@@ -1,0 +1,80 @@
+//=====================================================================
+// Author   : H Geng
+// Version  : v1.0
+// Description:
+//  RISC-V regfiles debug probe
+//** ADD THIS PROBE TO TESTBENCH & SIMULATION SOURCES **
+//** DO NOT ADD THIS PROBE TO TAPE-OUT CODES **
+//=====================================================================
+
+// riscv_regfiles_debug_probe is used to monitor the values of each register in the regfiles. 
+// This module must be added to the testbench and undergo specific modifications.
+// RRDP means RiscvRegfilesDebugProbe
+
+//    wire [31:0] rrdp_x0_zero;
+//    wire [31:0] rrdp_x1_ra  ;
+//    wire [31:0] rrdp_x2_sp  ;
+//    wire [31:0] rrdp_x3_gp  ;
+//    wire [31:0] rrdp_x4_tp  ;
+//    wire [31:0] rrdp_x5_t0  ;
+//    wire [31:0] rrdp_x6_t1  ;
+//    wire [31:0] rrdp_x7_t2  ;
+//    wire [31:0] rrdp_x8_s0  ;
+//    wire [31:0] rrdp_x9_s1  ;
+//    wire [31:0] rrdp_x10_a0 ;
+//    wire [31:0] rrdp_x11_a1 ;
+//    wire [31:0] rrdp_x12_a2 ;
+//    wire [31:0] rrdp_x13_a3 ;
+//    wire [31:0] rrdp_x14_a4 ;
+//    wire [31:0] rrdp_x15_a5 ;
+//    wire [31:0] rrdp_x16_a6 ;
+//    wire [31:0] rrdp_x17_a7 ;
+//    wire [31:0] rrdp_x18_s2 ;
+//    wire [31:0] rrdp_x19_s3 ;
+//    wire [31:0] rrdp_x20_s4 ;
+//    wire [31:0] rrdp_x21_s5 ;
+//    wire [31:0] rrdp_x22_s6 ;
+//    wire [31:0] rrdp_x23_s7 ;
+//    wire [31:0] rrdp_x24_s8 ;
+//    wire [31:0] rrdp_x25_s9 ;
+//    wire [31:0] rrdp_x26_s10;
+//    wire [31:0] rrdp_x27_s11;
+//    wire [31:0] rrdp_x28_t3 ;
+//    wire [31:0] rrdp_x29_t4 ;
+//    wire [31:0] rrdp_x30_t5 ;
+//    wire [31:0] rrdp_x31_t6 ;
+//
+//    `define RRDP_REGFILES u_cpu_core.u_regfiles
+//
+//    assign rrdp_x0_zero = `RRDP_REGFILES.regs[0];
+//    assign rrdp_x1_ra   = `RRDP_REGFILES.regs[1];
+//    assign rrdp_x2_sp   = `RRDP_REGFILES.regs[2];
+//    assign rrdp_x3_gp   = `RRDP_REGFILES.regs[3];
+//    assign rrdp_x4_tp   = `RRDP_REGFILES.regs[4];
+//    assign rrdp_x5_t0   = `RRDP_REGFILES.regs[5];
+//    assign rrdp_x6_t1   = `RRDP_REGFILES.regs[6];
+//    assign rrdp_x7_t2   = `RRDP_REGFILES.regs[7];
+//    assign rrdp_x8_s0   = `RRDP_REGFILES.regs[8];
+//    assign rrdp_x9_s1   = `RRDP_REGFILES.regs[9];
+//    assign rrdp_x10_a0  = `RRDP_REGFILES.regs[10];
+//    assign rrdp_x11_a1  = `RRDP_REGFILES.regs[11];
+//    assign rrdp_x12_a2  = `RRDP_REGFILES.regs[12];
+//    assign rrdp_x13_a3  = `RRDP_REGFILES.regs[13];
+//    assign rrdp_x14_a4  = `RRDP_REGFILES.regs[14];
+//    assign rrdp_x15_a5  = `RRDP_REGFILES.regs[15];
+//    assign rrdp_x16_a6  = `RRDP_REGFILES.regs[16];
+//    assign rrdp_x17_a7  = `RRDP_REGFILES.regs[17];
+//    assign rrdp_x18_s2  = `RRDP_REGFILES.regs[18];
+//    assign rrdp_x19_s3  = `RRDP_REGFILES.regs[19];
+//    assign rrdp_x20_s4  = `RRDP_REGFILES.regs[20];
+//    assign rrdp_x21_s5  = `RRDP_REGFILES.regs[21];
+//    assign rrdp_x22_s6  = `RRDP_REGFILES.regs[22];
+//    assign rrdp_x23_s7  = `RRDP_REGFILES.regs[23];
+//    assign rrdp_x24_s8  = `RRDP_REGFILES.regs[24];
+//    assign rrdp_x25_s9  = `RRDP_REGFILES.regs[25];
+//    assign rrdp_x26_s10 = `RRDP_REGFILES.regs[26];
+//    assign rrdp_x27_s11 = `RRDP_REGFILES.regs[27];
+//    assign rrdp_x28_t3  = `RRDP_REGFILES.regs[28];
+//    assign rrdp_x29_t4  = `RRDP_REGFILES.regs[29];
+//    assign rrdp_x30_t5  = `RRDP_REGFILES.regs[30];
+//    assign rrdp_x31_t6  = `RRDP_REGFILES.regs[31];

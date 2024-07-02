@@ -3,6 +3,8 @@
 // Version  : v1.2
 // Description:
 //  riscv inst defines for debug probe
+//** ADD THIS PROBE TO TESTBENCH & SIMULATION SOURCES **
+//** DO NOT ADD THIS PROBE TO TAPE-OUT CODES **
 //=====================================================================
 
 `define DBG_OPCODE_LOAD     7'b0000011  // I1
@@ -18,38 +20,38 @@
 `define DBG_OPCODE_SYSTEM   7'b1110011  // I4/I5
 
 // string. Radix=ASCII
-`define DBG_REG_ASCII_X0    "x0/zero";
-`define DBG_REG_ASCII_X1    "x1/ra  ";
-`define DBG_REG_ASCII_X2    "x2/sp  ";
-`define DBG_REG_ASCII_X3    "x3/gp  ";
-`define DBG_REG_ASCII_X4    "x4/tp  ";
-`define DBG_REG_ASCII_X5    "x5/t0  ";
-`define DBG_REG_ASCII_X6    "x6/t1  ";
-`define DBG_REG_ASCII_X7    "x7/t2  ";
-`define DBG_REG_ASCII_X8    "x8/s0  ";
-`define DBG_REG_ASCII_X9    "x9/s1  ";
-`define DBG_REG_ASCII_X10   "x10/a0 ";
-`define DBG_REG_ASCII_X11   "x11/a1 ";
-`define DBG_REG_ASCII_X12   "x12/a2 ";
-`define DBG_REG_ASCII_X13   "x13/a3 ";
-`define DBG_REG_ASCII_X14   "x14/a4 ";
-`define DBG_REG_ASCII_X15   "x15/a5 ";
-`define DBG_REG_ASCII_X16   "x16/a6 ";
-`define DBG_REG_ASCII_X17   "x17/a7 ";
-`define DBG_REG_ASCII_X18   "x18/s2 ";
-`define DBG_REG_ASCII_X19   "x19/s3 ";
-`define DBG_REG_ASCII_X20   "x20/s4 ";
-`define DBG_REG_ASCII_X21   "x21/s5 ";
-`define DBG_REG_ASCII_X22   "x22/s6 ";
-`define DBG_REG_ASCII_X23   "x23/s7 ";
-`define DBG_REG_ASCII_X24   "x24/s8 ";
-`define DBG_REG_ASCII_X25   "x25/s9 ";
-`define DBG_REG_ASCII_X26   "x26/s10";
-`define DBG_REG_ASCII_X27   "x27/s11";
-`define DBG_REG_ASCII_X28   "x28/t3 ";
-`define DBG_REG_ASCII_X29   "x29/t4 ";
-`define DBG_REG_ASCII_X30   "x30/t5 ";
-`define DBG_REG_ASCII_X31   "x31/t6 ";
+`define DBG_REG_NAME_ASCII_X0    "x0/zero";
+`define DBG_REG_NAME_ASCII_X1    "x1/ra  ";
+`define DBG_REG_NAME_ASCII_X2    "x2/sp  ";
+`define DBG_REG_NAME_ASCII_X3    "x3/gp  ";
+`define DBG_REG_NAME_ASCII_X4    "x4/tp  ";
+`define DBG_REG_NAME_ASCII_X5    "x5/t0  ";
+`define DBG_REG_NAME_ASCII_X6    "x6/t1  ";
+`define DBG_REG_NAME_ASCII_X7    "x7/t2  ";
+`define DBG_REG_NAME_ASCII_X8    "x8/s0  ";
+`define DBG_REG_NAME_ASCII_X9    "x9/s1  ";
+`define DBG_REG_NAME_ASCII_X10   "x10/a0 ";
+`define DBG_REG_NAME_ASCII_X11   "x11/a1 ";
+`define DBG_REG_NAME_ASCII_X12   "x12/a2 ";
+`define DBG_REG_NAME_ASCII_X13   "x13/a3 ";
+`define DBG_REG_NAME_ASCII_X14   "x14/a4 ";
+`define DBG_REG_NAME_ASCII_X15   "x15/a5 ";
+`define DBG_REG_NAME_ASCII_X16   "x16/a6 ";
+`define DBG_REG_NAME_ASCII_X17   "x17/a7 ";
+`define DBG_REG_NAME_ASCII_X18   "x18/s2 ";
+`define DBG_REG_NAME_ASCII_X19   "x19/s3 ";
+`define DBG_REG_NAME_ASCII_X20   "x20/s4 ";
+`define DBG_REG_NAME_ASCII_X21   "x21/s5 ";
+`define DBG_REG_NAME_ASCII_X22   "x22/s6 ";
+`define DBG_REG_NAME_ASCII_X23   "x23/s7 ";
+`define DBG_REG_NAME_ASCII_X24   "x24/s8 ";
+`define DBG_REG_NAME_ASCII_X25   "x25/s9 ";
+`define DBG_REG_NAME_ASCII_X26   "x26/s10";
+`define DBG_REG_NAME_ASCII_X27   "x27/s11";
+`define DBG_REG_NAME_ASCII_X28   "x28/t3 ";
+`define DBG_REG_NAME_ASCII_X29   "x29/t4 ";
+`define DBG_REG_NAME_ASCII_X30   "x30/t5 ";
+`define DBG_REG_NAME_ASCII_X31   "x31/t6 ";
 
 // string. Radix=ASCII
 `define DBG_INST_TYPE_ASCII_R         "R   "
